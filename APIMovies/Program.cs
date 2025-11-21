@@ -30,4 +30,4 @@ app.MapControllers();
 
 app.Run();
 
-// Clase 1 -21:40
+// 20/11/2025 - Terminamos Clase 1, continuamos en Clase 2 --
