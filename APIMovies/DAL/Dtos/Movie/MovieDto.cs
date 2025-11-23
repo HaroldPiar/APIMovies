@@ -4,6 +4,8 @@ namespace APIMovies.DAL.Dtos.Movie
 {
     public class MovieDto
     {
+        public int Id { get; set; }
+
         [Required(ErrorMessage = "El nombre de la película es obligatorio")]
         [MaxLength(100, ErrorMessage = "El nombre de la película no puede exceder los 100 caracteres")]
         public string Name { get; set; }

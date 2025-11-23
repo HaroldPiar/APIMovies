@@ -4,7 +4,6 @@ namespace APIMovies.Repository.IRepository
 {
     public interface IMovieRepository
     {
-
         Task<ICollection<Movie>> GetMoviesAsync();
         Task<Movie> GetMovieAsync(int id);
         Task<bool> MovieExistsByIdAsync(int id);

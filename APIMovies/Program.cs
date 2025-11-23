@@ -18,9 +18,11 @@ builder.Services.AddAutoMapper(cfg => cfg.AddProfile<Mappers>());
 
 // repositories 
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IMovieRepository, MovieRepository>();
 
 // services 
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<IMovieService, MovieService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -44,4 +46,4 @@ app.MapControllers();
     
 app.Run();
 
-// 22/11/2025 - Vamos en la clase 4, continuamos minuto 17:00--
+// 22/11/2025 - Terminamos clase 4, continuamos clase 5--
