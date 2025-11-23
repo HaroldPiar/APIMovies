@@ -73,7 +73,7 @@ namespace APIMovies.Repository
 
         private async Task<bool> SaveAsync()
         {
-            return await _context.SaveChangesAsync() <= 0 ? true : false; ;
+            return await _context.SaveChangesAsync() >= 0 ? true : false;
         }
     }
 }
