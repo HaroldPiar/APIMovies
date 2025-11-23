@@ -32,6 +32,12 @@ namespace APIMovies.Controllers
         public async Task<ActionResult<CategoryDto>> GetCategoryAsync(int id)
         {
             var category = await _categoryService.GetCategoryAsync(id);
+            
+            if (category == null)
+            {
+                return NotFound();
+            }
+
             return Ok(category);
         }
 

@@ -34,6 +34,12 @@ namespace APIMovies.Controllers
         public async Task<ActionResult<MovieDto>> GetMovieAsync(int id)
         {
             var movie = await _movieService.GetMovieAsync(id);
+
+            if (movie == null)
+            {
+                return NotFound();
+            }
+
             return Ok(movie);
         }
 

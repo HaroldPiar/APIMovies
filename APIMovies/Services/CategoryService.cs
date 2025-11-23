@@ -27,12 +27,6 @@ namespace APIMovies.Services
         public async Task<CategoryDto> GetCategoryAsync(int id)
         {
             var category = await _categoryRepository.GetCategoryAsync(id);
-
-            if(category == null)
-            {
-                throw new InvalidOperationException($"Category with id {id} not found.");
-            }
-
             return _mapper.Map<CategoryDto>(category);
         }
 
