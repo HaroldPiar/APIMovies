@@ -14,7 +14,7 @@ namespace APIMovies.Repository
             _context = context;
         }
 
-        public async Task<Category> GetCategoryByIdAsync(int id)
+        public async Task<Category> GetCategoryAsync(int id)
         {
             return await _context.Categories.
                 AsNoTracking().

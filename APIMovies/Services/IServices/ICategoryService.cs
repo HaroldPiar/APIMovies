@@ -11,7 +11,7 @@ namespace APIMovies.Services.IServices
          */
 
         Task<ICollection<CategoryDto>> GetCategoriesAsync(); 
-        Task<Category> GetCategoryByIdAsync(int id); 
+        Task<Category> GetCategoryAsync(int id); 
         Task<bool> CategoryExistsByIdAsync(int id); 
         Task<bool> CategoryExistsByNameAsync(string name); 
         Task<bool> CreateCategoryAsync(Category category); 

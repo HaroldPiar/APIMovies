@@ -22,7 +22,7 @@ namespace APIMovies.Repository.IRepository
         */
 
         Task<ICollection<Category>> GetCategoriesAsync(); // Lista de todas las categorias
-        Task<Category> GetCategoryByIdAsync(int id); // Categoria por Id
+        Task<Category> GetCategoryAsync(int id); // Categoria por Id
         Task<bool> CategoryExistsByIdAsync(int id); // Validacion de existencia de una categoria por Id
         Task<bool> CategoryExistsByNameAsync(string name); // Validacion de existencia de una categoria por Nombre
         Task<bool> CreateCategoryAsync(Category category); // Crear una nueva categoria
