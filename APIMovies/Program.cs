@@ -5,7 +5,6 @@ using APIMovies.Repository.IRepository;
 using APIMovies.Services;
 using APIMovies.Services.IServices;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -43,7 +42,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
-    
+
 app.Run();
 
-// 22/11/2025 - Terminamos clase 4, continuamos clase 5--
+// 22/11/2025 - Vamos en clase 5, continuamos en minuto 25:25 
