@@ -47,7 +47,7 @@ namespace APIMovies.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
-        public async Task<ActionResult<bool>> CreateCategoryAsync([FromBody] CategoryCreateUpdateDto categoryCreateUpdateDto)
+        public async Task<ActionResult<CategoryDto>> CreateCategoryAsync([FromBody] CategoryCreateUpdateDto categoryCreateUpdateDto)
         {
 
             if (!ModelState.IsValid)

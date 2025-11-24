@@ -9,7 +9,7 @@ namespace APIMovies.DAL.Dtos.Movie
         public string Name { get; set; }
         
         [Required(ErrorMessage = "La diración, en minutos, es obligatoria")]
-        [MinLength(60, ErrorMessage ="Las películas inferiores a 1 hora son consideradas cortometrajes")] //Profe esto no es cierto, me lo inventé 
+        [Range(60, int.MaxValue, ErrorMessage = "Las películas inferiores a 1 hora son consideradas cortometrajes")] //Profe esto no es cierto, me lo inventé 
         public int Duration { get; set; }
         
         public string? Description { get; set; }
