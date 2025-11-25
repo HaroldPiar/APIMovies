@@ -109,7 +109,7 @@ namespace APIMovies.Controllers
         }
 
         [HttpDelete("{id}:int", Name = "DeleteCategoryAsync")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<CategoryDto>> DeleteCategoryAsync(int id)
@@ -119,7 +119,7 @@ namespace APIMovies.Controllers
             try
             {
                 var deletedCategory = await _categoryService.DeleteCategoryAsync(id);
-                return Ok(deletedCategory);
+                return NoContent();
             }
             catch (KeyNotFoundException ex)
             {

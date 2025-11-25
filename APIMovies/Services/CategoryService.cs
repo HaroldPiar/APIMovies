@@ -97,15 +97,10 @@ namespace APIMovies.Services
             return category;
         }
 
-
-
-        /*-------------------------*/
-
         public Task<bool> CategoryExistsByNameAsync(string name)
         {
             throw new NotImplementedException();
         }
-
 
     }
 }

@@ -1,6 +1,7 @@
 ﻿using APIMovies.DAL.Dtos.Category;
 using APIMovies.DAL.Dtos.Movie;
 using APIMovies.DAL.Models;
+using APIMovies.Repository;
 using APIMovies.Repository.IRepository;
 using APIMovies.Services.IServices;
 using AutoMapper;
@@ -19,7 +20,7 @@ namespace APIMovies.Services
         }
         public async Task<ICollection<MovieDto>> GetMoviesAsync()
         {
-            var movies =  await _movieRepository.GetMoviesAsync();
+            var movies = await _movieRepository.GetMoviesAsync();
             return _mapper.Map<ICollection<MovieDto>>(movies);
         }
 
@@ -33,7 +34,8 @@ namespace APIMovies.Services
         {
             var movieExist = await _movieRepository.MovieExistsByNameAsync(movieCreateUpdateDto.Name);
 
-            if (movieExist) {
+            if (movieExist)
+            {
                 throw new InvalidOperationException($"Movie with name '{movieCreateUpdateDto.Name}' already exists");
             }
 
@@ -48,24 +50,56 @@ namespace APIMovies.Services
             return _mapper.Map<MovieDto>(movie);
         }
 
-
-        //----------------------------------------------------------------
-        public async Task<MovieDto> UpdateMovieAsync(MovieCreateUpdateDto movieCreateUpdateDto)
+        public async Task<MovieDto> UpdateMovieAsync(MovieCreateUpdateDto movieCreateUpdateDto, int id)
         {
-            throw new NotImplementedException();
+            var movieExisting = await GetMovieByIdAsync(id);
+
+            var categoryName = await _movieRepository.MovieExistsByNameAsync(movieCreateUpdateDto.Name);
+
+            if (categoryName)
+            {
+                throw new InvalidOperationException($"Movie with name '{movieCreateUpdateDto.Name}' already exists.");
+            }
+
+            _mapper.Map(movieCreateUpdateDto, movieExisting);
+
+            var isUpdated = await _movieRepository.UpdateMovieAsync(movieExisting);
+
+            if (!isUpdated)
+            {
+                throw new Exception("Failed to update movie.");
+            }
+
+            return _mapper.Map<MovieDto>(movieExisting);
         }
 
+        private async Task<Movie> GetMovieByIdAsync(int id)
+        {
+
+            var movie = await _movieRepository.GetMovieAsync(id);
+
+            if (movie == null)
+            {
+                throw new KeyNotFoundException($"Movie with id '{id}' not found.");
+            }
+
+            return movie;
+        }
         public async Task<bool> DeleteMovieAsync(int id)
         {
-            throw new NotImplementedException();
+            await GetMovieByIdAsync(id);
+
+            var isDeleted = await _movieRepository.DeleteMovieAsync(id);
+
+            if (!isDeleted)
+            {
+                throw new Exception("Failed to delete category.");
+            }
+
+            return isDeleted;
         }
 
-        public async Task<bool> MovieExistsByIdAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<bool> MovieExistsByNameAsync(string name)
+        public Task<bool> MovieExistsByNameAsync(string name)
         {
             throw new NotImplementedException();
         }

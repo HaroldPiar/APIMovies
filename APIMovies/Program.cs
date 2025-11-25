@@ -44,5 +44,3 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
-
-// 22/11/2025 - Vamos en clase 5, continuamos en minuto 25:25 
