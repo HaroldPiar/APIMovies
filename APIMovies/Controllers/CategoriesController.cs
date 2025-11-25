@@ -76,5 +76,59 @@ namespace APIMovies.Controllers
             }
         }
 
+        [HttpPut("{id}:int", Name = "UpdateCategoryAsync")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
+        public async Task<ActionResult<CategoryDto>> UpdateCategoryAsync(int id, [FromBody] CategoryCreateUpdateDto categoryCreateUpdateDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                var updatedCategory = await _categoryService.UpdateCategoryAsync(categoryCreateUpdateDto, id);
+                return Ok(updatedCategory);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(new { ex.Message });
+            }
+            catch (InvalidOperationException ex) when (ex.Message.Contains("Category with name"))
+            {
+                return Conflict(new { ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+        [HttpDelete("{id}:int", Name = "DeleteCategoryAsync")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<CategoryDto>> DeleteCategoryAsync(int id)
+        {
+            var category = await _categoryService.GetCategoryAsync(id);
+
+            try
+            {
+                var deletedCategory = await _categoryService.DeleteCategoryAsync(id);
+                return Ok(deletedCategory);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(new { ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
     }
 }

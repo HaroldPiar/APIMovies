@@ -72,6 +72,38 @@ namespace APIMovies.Controllers
             }
         }
 
+        /*
+        [HttpPut(Name = "UpdateMovieAsync")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
+        public async Task<ActionResult<MovieDto>> UpdateMovieAsync([FromBody] MovieCreateUpdateDto movieCreateUpdateDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            try
+            {
+                var updatedMovie = await _movieService.UpdateMovieAsync(movieCreateUpdateDto);
+
+                return CreatedAtRoute(
+                    "GetMovieAsync",
+                    new { id = updatedMovie.Id },
+                    updatedMovie
+                    );
+            }
+            catch (InvalidOperationException ex) when (ex.Message.Contains($"The movie {movieCreateUpdateDto.Name} already exists"))
+            {
+                return Conflict(new { ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+        */
 
     }
 }

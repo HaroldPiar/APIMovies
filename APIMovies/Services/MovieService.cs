@@ -48,7 +48,13 @@ namespace APIMovies.Services
             return _mapper.Map<MovieDto>(movie);
         }
 
+
         //----------------------------------------------------------------
+        public async Task<MovieDto> UpdateMovieAsync(MovieCreateUpdateDto movieCreateUpdateDto)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<bool> DeleteMovieAsync(int id)
         {
             throw new NotImplementedException();
@@ -60,11 +66,6 @@ namespace APIMovies.Services
         }
 
         public async Task<bool> MovieExistsByNameAsync(string name)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<MovieDto> UpdateMovieAsync(MovieCreateUpdateDto movieCreateUpdateDto)
         {
             throw new NotImplementedException();
         }
