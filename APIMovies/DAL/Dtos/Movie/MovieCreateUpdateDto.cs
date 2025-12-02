@@ -15,6 +15,7 @@ namespace APIMovies.DAL.Dtos.Movie
         public string? Description { get; set; }
         
         [Required (ErrorMessage = "La clasificación de la película es obligatoria")]
+        [MaxLength(10, ErrorMessage = "La clasificación no puede contener mas de 10 caracteres")]
         public string Clasification { get; set; }
     }
 }
